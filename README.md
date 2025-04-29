@@ -13,8 +13,11 @@ Each subfolder contains a dedicated `README.md` file with detailed information a
 If you use this repository in your work, please cite the following publication (link will be added once published):
 
 <details>
-<summary><strong>APA  citation</strong> (click to expand)</summary>
+<summary><strong>APA citation</strong> (click to expand)</summary>
+
 De Meyer, S., Alali, S., Laroy, M., Vande Casteele, T., Van Cauwenberghe, M., Goossens, J., De Rocker, C., Vanbrabant, J., Vanmechelen, E., Van den Stock, J., Bouckaert, F., Van Laere, K., Vandenbulcke, M., Emsell, L., & Poesen, K. (2025). *Plasma VAMP2 and GFAP associate with synaptic density in older adults without dementia*. *[Journal Name]*. https://doi.org/10.xxxx/xxxxx
+
+</details>
 
 <details>
 <summary><strong>BibTeX citation</strong> (click to expand)</summary>
