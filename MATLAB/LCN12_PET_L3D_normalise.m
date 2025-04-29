@@ -76,7 +76,7 @@ for subj = 1:nr_subjects
        copyfile(fullfile(fullfile(fullfile(maindir,subjectfolder_name),'ses-01'),name_PET_folder),datadir_PET);
 
        cd(subjectfolder_new)
-       name_logfile = fullfile(datadir_PET,'L3D_preprocessing_UCBJ.txt');
+       name_logfile = fullfile(datadir_PET,'L3D_preprocessing_UCBJ.txt'); % change to *_MK in case of MK PET scans
        fid  = fopen(name_logfile,'a+');
        fprintf(fid,'subject = %s\n',subjectfolder_new);
        fprintf(fid,'LCN12_PET_L3D.m \n'); %changed to name of current script
