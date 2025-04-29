@@ -1,4 +1,3 @@
-# L3D_Synaptic
 # Image Processing and Statistical Analysis Pipelines
 
 This repository contains scripts and workflows developed for image processing and statistical analysis across different software environments. The code is organized into subdirectories based on the programming language or platform used:
