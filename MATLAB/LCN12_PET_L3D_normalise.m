@@ -23,14 +23,6 @@
 clear
 close all
 
-% interval = [90 110]; % in min. for SUVR
-% ref_VOI = {
-% 'pathname\resl_to_wmc1_SPM12_aal_whole_cerebellum.img'
-%     0.3;
-%     'Whole_Cerebellum'
-% };
-% 
-% GM_threshold = 0.3;
 
 maindir = 'pathname_maindir'; % directory where the folders of each subject can  be found
 processing_mainfolder = 'processing_*'; % in this directory the processed data will be written
@@ -38,17 +30,9 @@ name_PET_folder = 'pet_trc-*';
 
 subject_list = {
     % name of the folder within the maindir
-% 's*'
+ 's*'
 };
 
-% frames_timing = [
-%     % start time in s pi    end time in s pi    weight (optional)
-%       5400                    6600                
-%             
-% ];
-% 
-% threshold_rotation    = 5; % in degrees
-% threshold_translation = 5; % in mm
 %++++++++++++++++ DO NOT CHANGE BELOW THIS LINE +++++++++++++++++++++++++++
 cd(maindir)
 % determine the path of the prior data of SPM
