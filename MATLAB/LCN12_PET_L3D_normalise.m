@@ -86,17 +86,12 @@ for subj = 1:nr_subjects
        fprintf(fid,'Processing started: %s at %i h %i min %i s\n',date,tmp(4), tmp(5),round(tmp(6)));
        fprintf(fid,'\n');
        fprintf(fid,'Settings\n');
-%        fprintf(fid,'threshold (overall translation in mm)   = %4.2f \n',threshold_translation);
-%        fprintf(fid,'threshold (overall rotation in degrees) = %4.2f \n',threshold_rotation);
-%         
+ 
        % create the subdirectories we need
        mkdir(datadir_tmp)
        mkdir(datadir_anat)
        mkdir(datadir_batch)
     
-        nr_frames = 1
-%        % calculate midscan times (in minutes)
-%        acqtimes = frames_timing(:,1:2)/60; % in minutes
 
        fprintf('...initializing SPM \n');
        matlabbatch = {};
@@ -135,80 +130,9 @@ for subj = 1:nr_subjects
        
        close all
        
-%        % realign the images
-%        %+++++++++++++++++++
-%        fprintf('...creating the realign batchfile for subject %s\n',subjectfolder_name);
-%        matlabbatch = {};
-%        matlabbatch{1}.spm.spatial.realign.estimate.data = {filelist}';
-%        matlabbatch{1}.spm.spatial.realign.estimate.eoptions.quality = 0.9;
-%        matlabbatch{1}.spm.spatial.realign.estimate.eoptions.sep = 4;
-%        matlabbatch{1}.spm.spatial.realign.estimate.eoptions.fwhm = 5;
-%        matlabbatch{1}.spm.spatial.realign.estimate.eoptions.rtm = 1;
-%        matlabbatch{1}.spm.spatial.realign.estimate.eoptions.interp = 2;
-%        matlabbatch{1}.spm.spatial.realign.estimate.eoptions.wrap = [0 0 0];
-%        matlabbatch{1}.spm.spatial.realign.estimate.eoptions.weight = '';
-%        cd(datadir_batch)
-%        save batch_realign matlabbatch
-%        cd(datadir_PET)
-%        fprintf(fid,'\n');
-%        tmp  = clock;
-%        fprintf(fid,'Realignment started: %s at %i h %i min %i s\n',date,tmp(4), tmp(5),round(tmp(6)));
-%        
-%        % run batchfile
-%        spm_jobman('run',matlabbatch)
-%        tmp  = clock;
-%        fprintf(fid,'Realignment ended at: %i h %i min %i s\n',tmp(4), tmp(5),round(tmp(6)));
-% 
-%        % display realignment parameters and determine bad volumes
-%        %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-%        filelist_rp = dir('rp_*.txt');
-%        if size(filelist_rp,1) ~= 1
-%           fprintf('ERROR subject %s: more than 1 realignment file (rp_*.txt) found\n',subjectfolder_name);
-%        end
-%        rp_file = filelist_rp(1).name;
-%        %bad_volumes = LCN12_analyze_headmovement_PET(rp_file,threshold_translation,threshold_rotation);    
-% 
-%        %bad_frames = bad_volumes;
-%        %save bad_frames bad_frames
-%        
-%       % index_ok = setdiff([1:nr_frames],bad_frames);
-%       % filelist_ok = filelist(index_ok);
-%        matlabbatch = {};
-%        matlabbatch{1}.spm.spatial.realign.write.data = filelist;
-%        matlabbatch{1}.spm.spatial.realign.write.roptions.which = [0 1];
-%        matlabbatch{1}.spm.spatial.realign.write.roptions.interp = 4;
-%        matlabbatch{1}.spm.spatial.realign.write.roptions.wrap = [0 0 0];
-%        matlabbatch{1}.spm.spatial.realign.write.roptions.mask = 1;
-%        matlabbatch{1}.spm.spatial.realign.write.roptions.prefix = 'r';
-% 
-%        % run batchfile
-%        spm_jobman('run',matlabbatch)
-%        
-%        filelist = dir('SUVR*.nii');
-%        if size(filelist,1) ~= 1
-%           fprintf('ERROR subject %s: no or more than one mean image found\n',subjectdir);
-%           return;
-%       end
       filename_mean = fullfile('SUVR_UCBJ_1.nii'); %Changed this from datadir_PET,filelist(1).name since I now only have 1 PET frame (SUVR image) and this code did not asign a value to the variable
-% 
-%        % read all images to generate an image for quality checking
-%        %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-%       img4D = zeros(Vref(1).dim(1),Vref(1).dim(2),Vref(1).dim(3),nr_frames);
-%        for i = 1:nr_frames
-%          [img,~] = LCN12_read_image(char(Pdy(i)),Vref);
-%           img4D(:,:,:,i) = img;
-%        end
-%        qcimg1 = squeeze(img4D(:,,round(Vref(1).dim(3)/2),:));
-%        filename_qc1 = fullfile(datadir_PET,'qc1.nii');
-%        LCN12_write_image(qcimg1,filename_qc1,'qc image');        
-%        qcimg2 = squeeze(img4D(:,round(Vref(1).dim(2)/2),:,:));
-%        filename_qc2 = fullfile(datadir_PET,'qc2.nii');
-%        LCN12_write_image(qcimg2,filename_qc2,'qc image');        
-%        qcimg3 = squeeze(img4D(round(Vref(1).dim(1)/2),:,:,:));
-%        filename_qc3 = fullfile(datadir_PET,'qc3.nii');
-%        LCN12_write_image(qcimg3,filename_qc3,'qc image');        
-%        clear img4D
-%     
+                                                   % Change to 'SUVR_MK_1.nii' in case of MK PET scan
+
        % coregister the PET and MRI
        %+++++++++++++++++++++++++++
        cd(datadir_MRI)
@@ -226,11 +150,8 @@ for subj = 1:nr_subjects
        
        source_image = filename_mean;
        
-%        filelist = {};
-%        for i = 1:nr_frames
-%            filelist{i,1} = char(Pdy{i});
-%        end
-       % genarate the batch file 
+
+       % generate the batch file 
        fprintf('...creating the coregister batchfile for subject %s\n',subjectfolder_name);
        matlabbatch = {};
        matlabbatch{1}.spm.spatial.coreg.estimate.ref = cellstr(ref_image);
@@ -349,126 +270,7 @@ for subj = 1:nr_subjects
        tmp  = clock;
        fprintf(fid,'Warping segmentations ended at: %i h %i min %i s\n',tmp(4), tmp(5),round(tmp(6)));
     
-%        % cleaning directories and moving data
-%        %+++++++++++++++++++++++++++++++++++++
-%        fprintf(fid,'cleaning directory\n');
-%        cd(datadir_PET)
-%        movefile(fullfile(datadir_PET,'qc1.nii'),fullfile(datadir_tmp,'qc1.nii'));
-%        movefile(fullfile(datadir_PET,'qc2.nii'),fullfile(datadir_tmp,'qc2.nii'));
-%        movefile(fullfile(datadir_PET,'qc3.nii'),fullfile(datadir_tmp,'qc3.nii'));
-%        tmp = dir('mean*.nii');
-%        movefile(fullfile(datadir_PET,tmp(1).name),fullfile(datadir_tmp,tmp(1).name));
-%        for i = 1:nr_frames
-%            [pth,name,ext,~] = spm_fileparts(char(Pdy(i)));
-%            movefile(fullfile(datadir_PET,fullfile([name ext])),fullfile(datadir_tmp,fullfile([name ext]))); 
-%        end
-%        movefile(fullfile(datadir_anat,'wc*'),datadir_PET); 
-%        movefile(fullfile(datadir_anat,'wm*'),datadir_PET);    
-%        fclose(fid);
-%        
-%        % generate SUVR image
-%        %++++++++++++++++++++
-%        reference_name       = char(ref_VOI(3,1));
-%        SUVR_start_time      = interval(1); % in min
-%        SUVR_end_time        = interval(2); % in min
-%        outputname_log = fullfile(datadir_PET,['SUVR_' reference_name '_' num2str(SUVR_start_time) 'min_' num2str(SUVR_end_time) 'min_log.txt']);
-%        fid = fopen(outputname_log,'a+');
-% 
-%        ref_VOI_file         = char(ref_VOI(1,1));
-%        threshold_ref_VOI    = cell2mat(ref_VOI(2,1)); 
-%        brain_mask_file = 'not specified';
-%        
-%        tmp_GM = dir('wc1*.nii');
-%        filename_GM = fullfile(datadir_PET,tmp_GM(1).name);
-%        VOI_mask = {
-%            filename_GM;
-%            GM_threshold;
-%               };
-%        VOI_mask_file        = char(VOI_mask(1,1));
-%        threshold_VOI_mask   = cell2mat(VOI_mask(2,1));
-% 
-%        % write info to log file
-%        %-----------------------
-%        fprintf(fid,'%c','-'*ones(1,30));
-%        fprintf(fid,'\n');
-%        tmp  = clock;
-%        fprintf(fid,'Processing started: %s at %i h %i min %i s\n',date,tmp(4), tmp(5),round(tmp(6)));
-%        fprintf(fid,'\n');
-%        fprintf(fid,'Settings\n');
-%        fprintf(fid,'reference VOI = %s\n',ref_VOI_file);
-%        fprintf(fid,'reference VOI threshold = %4.2f\n',threshold_ref_VOI);
-%        fprintf(fid,'reference VOI short name = %s\n',reference_name);
-%        fprintf(fid,'SUVR_start_time = %i min \n',SUVR_start_time);
-%        fprintf(fid,'SUVR_end_time = %i min \n',SUVR_end_time);
-%        fprintf(fid,'global mask   = %s\n',brain_mask_file);
-%        fprintf(fid,'VOI mask      = %s\n',VOI_mask_file);
-%        fprintf(fid,'VOI mask threshold  = %4.2f\n',threshold_VOI_mask);
-%        first_frame = 1;
-%        last_frame  = 1;
-%        fprintf(fid,'number of frames = %i\n',nr_frames);
-%        fprintf(fid,'first frame for SUVR calculation = %i\n',first_frame);
-%        fprintf(fid,'last frame for SUVR calculation  = %i\n',last_frame);
-% 
-%        clear Vref
-%        Pdy = {};
-%        filelist = dir('wPETframe*.nii');       
-%        nr_frames_dy = size(filelist,1);
-%        if nr_frames_dy ~= nr_frames
-%           fprintf('ERROR subject %s: total number of frames is not consistent with the frame defintion file\n',subjectfolder_name);
-%           return;
-%        else
-%           for frame = 1:nr_frames
-%               Pdy{frame} = fullfile(datadir_PET,[filelist(frame).name ',1']);
-%           end
-%        end    
-%        fprintf(fid,'Scans: \n');
-%        for frame = 1:nr_frames
-%            fprintf(fid,'frame %i \t %s\n',frame,char(Pdy(frame)));
-%        end
-%        fprintf(fid,'\n');
-%     
-%        % read last frame to obtain image size
-%        Vref      = spm_vol(char(Pdy(nr_frames)));
-%               
-%        % read reference VOI
-%        refVOIimg = LCN12_read_image(ref_VOI_file,Vref);
-%     
-%        % read dynamic data
-%        dydata = zeros(Vref.dim(1),Vref.dim(2),Vref.dim(3),nr_frames);
-%        for frame = 1:nr_frames
-%            clear tmp
-%            tmp = LCN12_read_image(char(Pdy{frame}),Vref);
-%            dydata(:,:,:,frame) = tmp/1000; %in kBq/ml
-%        end
-% 
-%        % read VOI mask
-%        VOI_mask_img = LCN12_read_image(VOI_mask_file,Vref);
-%        ref_VOI_mask = (VOI_mask_img > threshold_VOI_mask);
-%        brain_mask = ones(size(refVOIimg));
-% 
-%        % construct final reference VOI
-%        %------------------------------
-%        ref_mask = (refVOIimg > threshold_ref_VOI).*brain_mask.*ref_VOI_mask;
-%        outputname_ref_VOI = fullfile(datadir_PET,['SUVR_' reference_name '_' num2str(SUVR_start_time) 'min_' num2str(SUVR_end_time) 'min_refVOI.nii']);
-%        LCN12_write_image(ref_mask,outputname_ref_VOI,'SUVR',2,Vref);        
-% 
-%        % get the reference value for SUVR
-%        %---------------------------------
-%        ref_value = 0;
-%        for frame = first_frame:last_frame
-%           clear tmp
-%           tmp = squeeze(dydata(:,:,:,frame));
-%           ref_value = ref_value + nanmean(tmp(ref_mask>0));
-%        end
-%        ref_value = ref_value/(last_frame-first_frame+1);
-% 
-%        % calculate SUVR 
-%        %---------------
-%        sSUVR = squeeze(mean(dydata(:,:,:,first_frame:last_frame),4))./ref_value;
-%        outputname_SUVR = fullfile(datadir_PET,['SUVR_' reference_name '_' num2str(SUVR_start_time) 'min_' num2str(SUVR_end_time) 'min.nii']);
-%        LCN12_write_image(sSUVR,outputname_SUVR,'SUVR',Vref.dt(1),Vref);        
-%        
-%         
+
        % close log file
        %---------------    
        fclose(fid);
