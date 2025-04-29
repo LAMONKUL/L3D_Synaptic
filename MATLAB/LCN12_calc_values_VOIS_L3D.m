@@ -21,75 +21,19 @@ clear
 close all
 
 %------------- SETTINGS ---------------------------------------------------
-name_logfile  = 'D:\Projects\L3Dstudy\Analyses\CompleteSubset\UCBJ\corrected\GFAP\SUVR_values_MK_VOI.txt';
+name_logfile  = 'pathname\SUVR_values_*_VOI.txt';
 
-name_excel    = 'D:\Projects\L3Dstudy\Analyses\CompleteSubset\UCBJ\corrected\GFAP\SUVR_values_MK_VOI.xls'
+name_excel    = 'pathname\SUVR_values_*_VOI.xls'
 
 
-brain_mask_file = 'D:\SOFTWARE\AAL3_cerebrumMASK.nii'
-%'D:\SOFTWARE\spm12\tpm\mask_ICV.nii'; 
+brain_mask_file = 'pathname\AAL3_cerebrumMASK.nii'
 
 use_GM_info  = 0; % if 0, the whole VOI within the brain mask will be taken. Otherwise only GM voxels within the VOI will be used.
-GM_threshold = 0.5; % threshold to determing the GM voxels of that subject. Only needed if use_GM_info = 1
+GM_threshold = 0.3; % threshold to determing the GM voxels of that subject. Only needed if use_GM_info = 1
 
 IMAGELIST = {
     % full name of the images                       full name of the GM map (optional)
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B002\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B003\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B004\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B005\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B006\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B008\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B009\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B010\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B011\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B012\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B013\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B014\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B015\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B016\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B017\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B019\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B020\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B021\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B023\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B024\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B026\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B027\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B028\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B029\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B030\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B031\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B032\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B033\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B034\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B035\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B038\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B040\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B042\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B043\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B045\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B046\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B047\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B048\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B049\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B050\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B051\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B052\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B053\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B055\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B056\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B057\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B059\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B066_corrected\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B069\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B070\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B073\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B074_corrected\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B075\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B077\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B080\pet_trc-MK6240\wSUVR_MK_1.nii' 
-'D:\Projects\L3Dstudy\processing_MK_coregisteredtoPET_final\B081\pet_trc-MK6240\wSUVR_MK_1.nii' 
+'pathname\wSUVR_MK_1.nii' 
 };
 % if VOIS are specified, we assume that each VOI image represents a
 % specific VOI and this will be used. If VOIS is not specified, we assume
@@ -100,10 +44,8 @@ IMAGELIST = {
 
 VOIS = {
     % full name of the VOI images
-'D:\Projects\L3Dstudy\Analyses\CompleteSubset\UCBJ\corrected\GFAP\GFAP_UCBJmask.nii'
+'pathname\GFAP_UCBJmask.nii'
 };
-
-%ATLAS = 'L:\GBW-0071_LCN\APOE_studie\studie\S51125_SPM12_Scans_Baseline_Followup_PlusThresholds\Data\Scripts_VOIs\BN_Atlas_246_2mm.nii'; % full name of the atlas
 
 %------------- END OF SETTINGS --------------------------------------------
 
