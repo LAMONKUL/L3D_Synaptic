@@ -518,7 +518,7 @@ confint(lm_GFAP_UCBJ_Aneg)
 # F. Predictive value of GM volume for plasma biomarker levels
 ################################################################################
 # F1. Entire study population ####################################################
-# Multivariate linear regression model 
+# Multiple linear regression model 
 lm_GM_VAMP2_all <- lm(data = data_L3D_UCBJ, lnVAMP2_z ~ VAMP2_GM_adjustedVOI_norm+ Age + Sex_F)
 summary(lm_GM_VAMP2_all) 
 confint(lm_GM_VAMP2_all) 
