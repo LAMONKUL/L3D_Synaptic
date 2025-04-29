@@ -1,11 +1,9 @@
-# Image Processing Pipeline
 
-Image processing was fully automated using in-house scripts available at [https://github.com/THOMVDC/PSYPET](https://github.com/THOMVDC/PSYPET).
+# Pipeline Overview
 
-## Pipeline Overview
-
-- **SUVR Image Generation**:  
-  - **MK6240** and **UCB-J PET** images: SUVR images were generated in *participant-specific space*.  
+- **SUVR Image Generation**:
+  - SUVR image generation was fully automated using in-house scripts available at [https://github.com/THOMVDC/PSYPET](https://github.com/THOMVDC/PSYPET).
+  - **MK6240** and **UCB-J PET** images: SUVR images were generated in *participant-specific space*. 
   - **Flutemetamol PET** images: SUVR images were generated in *MNI space*.
 
 - **Normalisation to MNI Space for Voxelwise Analysis**:  
