@@ -23,89 +23,15 @@
 clear
 close all
 
-% interval = [90 110]; % in min. for SUVR
-% ref_VOI = {
-% 'C:\Users\u0115549\Documents\01_Projects\04_NP22-07-VUmc\Analysis\Matlab_scripts\VOIs\resl_to_wmc1_SPM12_aal_whole_cerebellum.img'
-%     0.5;
-%     'Whole_Cerebellum'
-% };
-% 
-% GM_threshold = 0.3;
-
-maindir = 'D:\Projects\L3Dstudy\'; % directory where the folders of each subject can  be found
-processing_mainfolder = 'processing_MK_66'; % in this directory the processed data will be written
-name_PET_folder = 'MK';
+maindir = 'pathname'; % directory where the folders of each subject can  be found
+processing_mainfolder = 'processing_*'; % in this directory the processed data will be written
+name_PET_folder = 'pet_trc-*';
 
 subject_list = {
     % name of the folder within the maindir
-% 'B002'
-%'B003'
-% % 'B004'
-%  'B005'
-% % 'B006'
-% % 'B008'
-% % 'B009'
-% % 'B010'
-%  'B011'
-%  'B012'
-% % 'B013'
-%  'B014'
-% % 'B015'
-% % 'B016'
-%  'B017'
-%  'B019'
-% % 'B020'
-% % 'B021'
-% % 'B023'
-% % 'B024'
-% 'B025'
-% 'B026'
-% 'B027'
-% 'B028'
-% 'B029'
-% 'B030'
-% 'B031'
-% 'B032'
-% 'B033'
-% 'B034'
-% 'B035'
-% 'B038'
-% 'B040'
-% 'B042'
-% 'B043'
-% 'B045'
-% 'B046'
-% 'B047'
-% 'B048'
-% 'B049'
-% 'B050'
-% 'B051'
-% 'B052'
-% 'B053'
-% 'B055'
-% 'B056'
-% 'B057'
-% 'B059'
- 'B066'
-% 'B069'
-% 'B070'
-% 'B073'
-% 'B074'
-% 'B075'
-% 'B077'
-
-
-
+ 's*'
 };
 
-% frames_timing = [
-%     % start time in s pi    end time in s pi    weight (optional)
-%       5400                    6600                
-%             
-% ];
-% 
-% threshold_rotation    = 5; % in degrees
-% threshold_translation = 5; % in mm
 %++++++++++++++++ DO NOT CHANGE BELOW THIS LINE +++++++++++++++++++++++++++
 cd(maindir)
 % determine the path of the prior data of SPM
@@ -187,7 +113,7 @@ for subj = 1:nr_subjects
        else
           for frame = 1
               % rename frame
-              new_filename = ['SUVR_MK_' num2str(frame) '.nii']; %Changed new name to SUVR_MK from fu_ (not sure what this stands for)
+              new_filename = ['SUVR_MK_' num2str(frame) '.nii']; %Changed new name to SUVR_MK from fu_ 
               movefile(filelist(frame).name,new_filename)
               Pdy{frame} = fullfile(datadir_PET,[new_filename ',1']);
           end
