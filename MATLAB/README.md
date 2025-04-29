@@ -11,8 +11,8 @@
 
 4. **MK6240 PVC Correction Workflow**:  
   For **MK6240 PET**, partial volume correction (PVC) removed skull information, complicating direct warping. To address this:  
-  - The **non-PVC MK6240 PET image** was used as an intermediary in the normalisation step.  
-  - This step was performed using the `LCN12_PET_L3Dpreprocessing_MK.m` script.
+   - The **non-PVC MK6240 PET image** was used as an intermediary in the normalisation step.  
+   - This step was performed using the `LCN12_PET_L3Dpreprocessing_MK.m` script.
 
 4. **SUVR Calculation in VOIs**:  
   Composite SUVR values in volumes of interest (VOIs) were calculated using the `LCN12_calc_values_VOIS_L3D.m` script.
