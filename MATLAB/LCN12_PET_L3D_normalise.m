@@ -130,7 +130,7 @@ for subj = 1:nr_subjects
        else
           for frame = 1
               % rename frame
-              new_filename = ['SUVR_UCBJ_' num2str(frame) '.nii']; %Changed new name to SUVR_MK from fu_ (not sure what this stands for)
+              new_filename = ['SUVR_UCBJ_' num2str(frame) '.nii']; %Change to SUVR_MK_ in case of MK PET scans
               movefile(filelist(frame).name,new_filename)
               Pdy{frame} = fullfile(datadir_PET,[new_filename ',1']);
           end
