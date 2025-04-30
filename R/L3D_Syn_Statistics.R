@@ -41,12 +41,10 @@ data_L3D_UCBJ_ANA = subset(data_L3D_UCBJ, A_Status == "NA")
 # Check normality
 agostino.test(data_L3D_UCBJ$MMSE)
 agostino.test(data_L3D_UCBJ_Aneg$MMSE)
-agostino.test(data_L3D_UCBJ_ANA$MMSE)
 agostino.test(data_L3D_UCBJ_healthy$MMSE)
 
 agostino.test(data_L3D_UCBJ$Age) 
 agostino.test(data_L3D_UCBJ_Aneg$Age)
-agostino.test(data_L3D_UCBJ_ANA$Age)
 agostino.test(data_L3D_UCBJ_healthy$Age)
 agostino.test(data_L3D_UCBJ_LLD$Age) 
 
@@ -62,13 +60,11 @@ agostino.test(data_L3D_UCBJ_LLD$A_SUVR)
 
 agostino.test(data_L3D_UCBJ$Abratio) 
 agostino.test(data_L3D_UCBJ_Aneg$Abratio)
-agostino.test(data_L3D_UCBJ_ANA$Abratio)
 agostino.test(data_L3D_UCBJ_healthy$Abratio)
 agostino.test(data_L3D_UCBJ_LLD$Abratio)
 
 agostino.test(data_L3D_UCBJ$pT181) 
 agostino.test(data_L3D_UCBJ_Aneg$pT181) 
-agostino.test(data_L3D_UCBJ_ANA$pT181) 
 agostino.test(data_L3D_UCBJ_healthy$pT181)
 agostino.test(log(data_L3D_UCBJ_healthy$pT181))
 agostino.test(data_L3D_UCBJ_LLD$pT181)
@@ -76,7 +72,6 @@ agostino.test(log(data_L3D_UCBJ_LLD$pT181))
 
 agostino.test(data_L3D_UCBJ$NfL) 
 agostino.test(data_L3D_UCBJ_Aneg$NfL)
-agostino.test(data_L3D_UCBJ_ANA$NfL)
 agostino.test(data_L3D_UCBJ_healthy$NfL)
 agostino.test(log(data_L3D_UCBJ_healthy$NfL))
 agostino.test(data_L3D_UCBJ_LLD$NfL)
@@ -84,13 +79,11 @@ agostino.test(log(data_L3D_UCBJ_LLD$NfL))
 
 agostino.test(data_L3D_UCBJ$GFAP) 
 agostino.test(data_L3D_UCBJ_Aneg$GFAP)
-agostino.test(data_L3D_UCBJ_ANA$GFAP)
 agostino.test(data_L3D_UCBJ_healthy$GFAP) 
 agostino.test(data_L3D_UCBJ_LLD$GFAP) 
 
 agostino.test(data_L3D_UCBJ$VAMP2) 
 agostino.test(data_L3D_UCBJ_Aneg$VAMP2)
-agostino.test(data_L3D_UCBJ_ANA$VAMP2)
 agostino.test(data_L3D_UCBJ_healthy$VAMP2)
 agostino.test(log(data_L3D_UCBJ_healthy$VAMP2)) 
 agostino.test(data_L3D_UCBJ_LLD$VAMP2) 
@@ -98,9 +91,17 @@ agostino.test(log(data_L3D_UCBJ_LLD$VAMP2))
 
 agostino.test(data_L3D_UCBJ$SNAP25) 
 agostino.test(data_L3D_UCBJ_Aneg$SNAP25)
-agostino.test(data_L3D_UCBJ_ANA$SNAP25)
 agostino.test(data_L3D_UCBJ_healthy$SNAP25)
 agostino.test(data_L3D_UCBJ_LLD$SNAP25)
+
+agostino.test(data_L3D_UCBJ$GFAP_UCBJ_adjustedVOI)
+agostino.test(data_L3D_UCBJ_Aneg$GFAP_UCBJ_adjustedVOI) 
+agostino.test(data_L3D_UCBJ_healthy$GFAP_UCBJ_adjustedVOI) 
+agostino.test(data_L3D_UCBJ_LLD$GFAP_UCBJ_adjustedVOI) 
+agostino.test(data_L3D_UCBJ$VAMP2_UCBJ_adjustedVOI)
+agostino.test(data_L3D_UCBJ_Aneg$VAMP2_UCBJ_adjustedVOI)
+agostino.test(data_L3D_UCBJ_healthy$VAMP2_UCBJ_adjustedVOI)
+agostino.test(data_L3D_UCBJ_LLD$VAMP2_UCBJ_adjustedVOI) 
 
 #descriptive statistics ################
 # MMSE
@@ -125,8 +126,8 @@ mean(data_L3D_UCBJ_Aneg$Age)
 sd(data_L3D_UCBJ_Aneg$Age)
 median(data_L3D_UCBJ_Apos$Age) 
 IQR(data_L3D_UCBJ_Apos$Age)
-mean(data_L3D_UCBJ_ANA$Age) 
-sd(data_L3D_UCBJ_ANA$Age)
+median(data_L3D_UCBJ_ANA$Age) 
+IQR(data_L3D_UCBJ_ANA$Age)
 mean(data_L3D_UCBJ_healthy$Age) 
 sd(data_L3D_UCBJ_healthy$Age)
 mean(data_L3D_UCBJ_LLD$Age)
@@ -225,8 +226,8 @@ mean(data_L3D_UCBJ_Aneg$Abratio, na.rm =T)
 sd(data_L3D_UCBJ_Aneg$Abratio, na.rm =T)
 median(data_L3D_UCBJ_Apos$Abratio, na.rm =T) 
 IQR(data_L3D_UCBJ_Aneg$Abratio, na.rm =T)
-mean(data_L3D_UCBJ_ANA$Abratio, na.rm =T) 
-sd(data_L3D_UCBJ_ANA$Abratio, na.rm =T)
+median(data_L3D_UCBJ_ANA$Abratio, na.rm =T) 
+IQR(data_L3D_UCBJ_ANA$Abratio, na.rm =T)
 mean(data_L3D_UCBJ_healthy$Abratio, na.rm =T)
 sd(data_L3D_UCBJ_healthy$Abratio, na.rm =T)
 mean(data_L3D_UCBJ_LLD$Abratio, na.rm =T) 
@@ -303,6 +304,37 @@ sd(data_L3D_UCBJ_healthy$SNAP25)
 mean(data_L3D_UCBJ_LLD$SNAP25) 
 sd(data_L3D_UCBJ_LLD$SNAP25) 
 t.test(data_L3D_UCBJ$SNAP25 ~ data_L3D_UCBJ$Group)
+
+#GFAP UCBJ
+mean(data_L3D_UCBJ$GFAP_UCBJ_adjustedVOI) #5.3196
+sd(data_L3D_UCBJ$GFAP_UCBJ_adjustedVOI) #0.7622824
+mean(data_L3D_UCBJ_Aneg$GFAP_UCBJ_adjustedVOI) #5.317195
+sd(data_L3D_UCBJ_Aneg$GFAP_UCBJ_adjustedVOI) #0.747935
+median(data_L3D_UCBJ_Apos$GFAP_UCBJ_adjustedVOI) 
+IQR(data_L3D_UCBJ_Apos$GFAP_UCBJ_adjustedVOI) 
+median(data_L3D_UCBJ_ANA$GFAP_UCBJ_adjustedVOI)
+IQR(data_L3D_UCBJ_ANA$GFAP_UCBJ_adjustedVOI)
+mean(data_L3D_UCBJ_healthy$GFAP_UCBJ_adjustedVOI) 
+sd(data_L3D_UCBJ_healthy$GFAP_UCBJ_adjustedVOI) 
+mean(data_L3D_UCBJ_LLD$GFAP_UCBJ_adjustedVOI) 
+sd(data_L3D_UCBJ_LLD$GFAP_UCBJ_adjustedVOI)
+t.test(data_L3D_UCBJ$GFAP_UCBJ_adjustedVOI ~ data_L3D_UCBJ$Group) 
+
+#VAMP2 UCBJ
+mean(data_L3D_UCBJ$VAMP2_UCBJ_adjustedVOI) 
+sd(data_L3D_UCBJ$VAMP2_UCBJ_adjustedVOI)
+mean(data_L3D_UCBJ_Aneg$VAMP2_UCBJ_adjustedVOI) 
+sd(data_L3D_UCBJ_Aneg$VAMP2_UCBJ_adjustedVOI) 
+median(data_L3D_UCBJ_Apos$VAMP2_UCBJ_adjustedVOI) 
+IQR(data_L3D_UCBJ_Apos$VAMP2_UCBJ_adjustedVOI) 
+median(data_L3D_UCBJ_ANA$VAMP2_UCBJ_adjustedVOI)
+IQR(data_L3D_UCBJ_ANA$VAMP2_UCBJ_adjustedVOI)
+mean(data_L3D_UCBJ_healthy$VAMP2_UCBJ_adjustedVOI)
+sd(data_L3D_UCBJ_healthy$VAMP2_UCBJ_adjustedVOI) 
+mean(data_L3D_UCBJ_LLD$VAMP2_UCBJ_adjustedVOI)
+sd(data_L3D_UCBJ_LLD$VAMP2_UCBJ_adjustedVOI) 
+t.test(data_L3D_UCBJ$VAMP2_UCBJ_adjustedVOI ~ data_L3D_UCBJ$Group)
+
 
 ################################################################################
 # B. Correlations between plasma biomarkers
