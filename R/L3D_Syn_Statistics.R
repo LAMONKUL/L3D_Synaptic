@@ -335,6 +335,10 @@ mean(data_L3D_UCBJ_LLD$VAMP2_UCBJ_adjustedVOI)
 sd(data_L3D_UCBJ_LLD$VAMP2_UCBJ_adjustedVOI) 
 t.test(data_L3D_UCBJ$VAMP2_UCBJ_adjustedVOI ~ data_L3D_UCBJ$Group)
 
+#NfL UCB-J
+agostino.test(data_L3D_UCBJ$NfL_UCBJ_adjustedVOI) 
+mean(data_L3D_UCBJ$NfL_UCBJ_adjustedVOI) 
+sd(data_L3D_UCBJ$NfL_UCBJ_adjustedVOI) 
 
 ################################################################################
 # B. Correlations between plasma biomarkers
